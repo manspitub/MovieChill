@@ -16,7 +16,7 @@ export class MoviesSliderComponent implements OnInit {
 
   paused = false;
 
-  backdropPath: string = 'https://image.tmdb.org/t/p/w780';
+  backdropPath: string = 'https://image.tmdb.org/t/p/original';
 
   ngOnInit(): void {
     this.Movies.sliderMovies().subscribe((result) => {
