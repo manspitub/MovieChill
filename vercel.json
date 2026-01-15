@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/dist/movie-chill/index.html"
+      "destination": "/index.html"
     }
   ]
 }
