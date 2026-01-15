@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "MovieChill:build:production"
+              "buildTarget": "movie-chill:build:production"
             },
             "development": {
-              "buildTarget": "MovieChill:build:development"
+              "buildTarget": "movie-chill:build:development"
             }
           },
           "defaultConfiguration": "development"
