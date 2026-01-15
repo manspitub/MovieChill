@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg fixed-top" [class.scrolled]="scrolled">
+  <div class="container-fluid">
+    <a class="navbar-brand netflix-logo" routerLink="/home">MovieChill</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-4">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home">
+            <i class="bi bi-house-door"></i>
+            <span class="nav-text">Home</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/discover">
+            <i class="bi bi-compass"></i>
+            <span class="nav-text">Discover</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/trending">
+            <i class="bi bi-fire"></i>
+            <span class="nav-text">Trending</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/favorites">
+            <i class="bi bi-heart"></i>
+            <span class="nav-text">Favorites</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

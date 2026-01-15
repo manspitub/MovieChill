@@ -1,0 +1,89 @@
+.carousel {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  gap: 20px;
+}
+
+.group {
+  display: flex;
+  gap: 20px;
+  animation: scroll 100s linear infinite;
+}
+
+.group.paused {
+  animation-play-state: paused;
+}
+
+.card {
+  flex: 0 0 clamp(200px, 50vw, 50em);
+  border: none;
+    
+  box-shadow: rgba(0, 0, 0, 10%) 5px 5px 20px 0;
+  justify-content: center;
+  position: relative;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  border: 2px solid #ee0808;
+  box-shadow: 0 0 20px #ee0808, rgba(0, 0, 0, 10%) 5px 5px 20px 0;
+}
+
+.card.active {
+  border: 2px solid #ee0808;
+  box-shadow: 0 0 20px #ee0808, rgba(0, 0, 0, 10%) 5px 5px 20px 0;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 0 0 clamp(150px, 80vw, 35em);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 0 0 clamp(120px, 90vw, 25em);
+  }
+}
+
+.card img {
+  height: 700px;
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  text-overflow: ellipsis;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  color: white;
+  padding: 10px;
+  text-overflow: fade;
+  overflow: hidden;
+}
+
+.caption h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e50914;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.caption h3 {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+  text-overflow: ellipsis;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  } /* solo mueve un grupo completo */
+}

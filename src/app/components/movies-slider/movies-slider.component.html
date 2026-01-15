@@ -1,0 +1,65 @@
+<div
+  class="carousel"
+  (mouseenter)="pauseCarousel()"
+  (mouseleave)="resumeCarousel()"
+>
+  <div class="group" [class.paused]="paused">
+    <div class="card" *ngFor="let movie of movies()">
+      <img [src]="backdropPath + movie.backdrop_path" [alt]="movie.title" />
+      <div class="caption">
+        <h2>{{ movie.title }}</h2>
+
+        <!-- En pantallas grandes mostramos overview -->
+        <p class="d-none d-lg-block">{{ movie.overview }}</p>
+
+        <!-- En pantallas pequeñas mostramos rating con icono -->
+        <div class="d-md-none">
+          <i class="bi bi-star-fill" style="color: #ffd700"></i>
+          <span>{{ (movie.vote_average / 2).toFixed(1) }}/5</span>
+        </div>
+
+        <!-- Rating con estrellas para medianas y grandes -->
+        <div class="rating d-none d-md-flex">
+          <i
+            *ngFor="let star of [1, 2, 3, 4, 5]"
+            [class]="
+              'bi ' +
+              (star <= movie.vote_average / 2 ? 'bi-star-fill' : 'bi-star')
+            "
+            [style.color]="star <= movie.vote_average / 2 ? '#ffd700' : '#ccc'"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group" aria-hidden="true" [class.paused]="paused">
+    <div class="card" *ngFor="let movie of movies()">
+      <img [src]="backdropPath + movie.backdrop_path" [alt]="movie.title" />
+      <div class="caption">
+        <h2>{{ movie.title }}</h2>
+
+        <!-- En pantallas medianas y grandes mostramos overview -->
+        <p class="d-none d-md-block">{{ movie.overview }}</p>
+
+        <!-- En pantallas pequeñas mostramos rating con icono -->
+        <div class="d-md-none">
+          <i class="bi bi-star-fill" style="color: #ffd700"></i>
+          <span>{{ (movie.vote_average / 2).toFixed(1) }}/5</span>
+        </div>
+
+        <!-- Rating con estrellas para medianas y grandes -->
+        <div class="rating d-none d-md-flex">
+          <i
+            *ngFor="let star of [1, 2, 3, 4, 5]"
+            [class]="
+              'bi ' +
+              (star <= movie.vote_average / 2 ? 'bi-star-fill' : 'bi-star')
+            "
+            [style.color]="star <= movie.vote_average / 2 ? '#ffd700' : '#ccc'"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
