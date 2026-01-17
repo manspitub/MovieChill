@@ -45,6 +45,7 @@
       <div class="card" *ngFor="let movie of movies()">
         <img
           draggable="false"
+          clicked="false"
           [src]="backdropPath + movie.backdrop_path"
           [alt]="movie.title"
         />

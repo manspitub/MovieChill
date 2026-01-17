@@ -21,8 +21,7 @@ export class MoviesSliderComponent implements OnInit {
   startX = 0;
   currentTranslate = 0;
   prevTranslate = 0;
-
-  
+  dragSpeed = 2; // Adjust this value to change drag sensitivity
 
   ngOnInit(): void {
     this.Movies.sliderMovies().subscribe((result) => {
@@ -52,8 +51,8 @@ export class MoviesSliderComponent implements OnInit {
 
     const currentX =
       event instanceof TouchEvent ? event.touches[0].clientX : event.clientX;
-    this.currentTranslate = this.prevTranslate + currentX - this.startX;
-    
+    const delta = currentX - this.startX;
+    this.currentTranslate = this.prevTranslate + delta * this.dragSpeed;
   }
 
   onDragEnd() {
