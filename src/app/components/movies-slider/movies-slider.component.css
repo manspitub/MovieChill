@@ -4,12 +4,17 @@
   width: 100%;
   position: relative;
   gap: 20px;
+  cursor: grab;
+}
+
+.carousel:active{
+  cursor: grabbing;
 }
 
 .group {
   display: flex;
   gap: 20px;
-  animation: scroll 100s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
 .group.paused {
@@ -84,6 +89,6 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
-  } /* solo mueve un grupo completo */
+    transform: translateX(-50%);
+  } 
 }
