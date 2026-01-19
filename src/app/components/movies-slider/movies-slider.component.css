@@ -7,7 +7,7 @@
   cursor: grab;
 }
 
-.carousel:active{
+.carousel:active {
   cursor: grabbing;
 }
 
@@ -22,39 +22,45 @@
 }
 
 .card {
-  flex: 0 0 clamp(200px, 50vw, 50em);
+  flex: 0 0 100vw;
   border: none;
-    
+
   box-shadow: rgba(0, 0, 0, 10%) 5px 5px 20px 0;
   justify-content: center;
   position: relative;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card:hover {
   border: 2px solid #ee0808;
-  box-shadow: 0 0 20px #ee0808, rgba(0, 0, 0, 10%) 5px 5px 20px 0;
+  box-shadow:
+    0 0 20px #ee0808,
+    rgba(0, 0, 0, 10%) 5px 5px 20px 0;
 }
 
 .card.active {
   border: 2px solid #ee0808;
-  box-shadow: 0 0 20px #ee0808, rgba(0, 0, 0, 10%) 5px 5px 20px 0;
+  box-shadow:
+    0 0 20px #ee0808,
+    rgba(0, 0, 0, 10%) 5px 5px 20px 0;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .card {
-    flex: 0 0 clamp(150px, 80vw, 35em);
+    flex: 0 0 80vw;
   }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 1200px) {
   .card {
-    flex: 0 0 clamp(120px, 90vw, 25em);
+    flex: 0 0 60vw;
   }
 }
 
 .card img {
-  height: 700px;
+  height: 500px;
   object-fit: cover;
 }
 
@@ -90,5 +96,5 @@
   }
   100% {
     transform: translateX(-50%);
-  } 
+  }
 }

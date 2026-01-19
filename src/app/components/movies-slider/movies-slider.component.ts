@@ -37,7 +37,6 @@ export class MoviesSliderComponent implements OnInit {
 
   ngOnInit(): void {
     this.Movies.sliderMovies().subscribe((result) => {
-      console.log('Slider Movies Result:', result);
       this.movies.set(result.results);
     });
   }
@@ -46,7 +45,6 @@ export class MoviesSliderComponent implements OnInit {
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
         this.groupWidth = entry.target.scrollWidth;
-        console.log('Group Width:', this.groupWidth);
       }
     });
 
@@ -81,11 +79,9 @@ export class MoviesSliderComponent implements OnInit {
   }
 
   checkInfiniteScroll() {
-    console.log('Current Translate:', this.currentTranslate);
-    console.log('Group Width:', this.groupWidth);
     // Cuando el grupo se ha desplazado completamente
     if (Math.abs(this.currentTranslate) >= this.groupWidth) {
-      console.log('Resetting translate for infinite scroll');
+      
       this.currentTranslate = 0;
       this.prevTranslate = 0;
     }
