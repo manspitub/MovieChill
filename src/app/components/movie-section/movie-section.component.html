@@ -1,1 +1,32 @@
-<p>movie-section works!</p>
+<section class="m-5">
+  <ng-container *ngFor="let genre of movieService.genresSignal().genres">
+    <div class="row mb-5">
+      <!-- Título del género -->
+      <h3 class="text-white">{{ genre.name }}</h3>
+
+      <!-- Fila de posters -->
+      <div [draggable]="false" class="rowposter mt-3 ">
+        <ng-container
+          *ngFor="
+            let movie of movieService.genreMoviesSignal()[genre.id].results
+          "
+        >
+          <ng-container  *ngIf="movie.poster_path; else noImage">
+            <img
+              draggable="false"
+              src="https://image.tmdb.org/t/p/original{{ movie.poster_path }}"
+              class="rowimg largeposter"
+              alt="{{ movie.title }}"
+            />
+          </ng-container>
+
+          <ng-template #noImage>
+            <div class="rowimg largeposter no-poster">
+              <span>{{ movie.title }}</span>
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</section>

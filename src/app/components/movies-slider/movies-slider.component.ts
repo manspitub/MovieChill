@@ -17,9 +17,8 @@ import { Movie } from '../../shared/interfaces/movies';
   styleUrl: './movies-slider.component.css',
 })
 export class MoviesSliderComponent implements OnInit {
-  private Movies = inject(MovieService);
+  movieService = inject(MovieService);
 
-  movies = signal<Movie[]>([]);
   paused = false;
   backdropPath: string = 'https://image.tmdb.org/t/p/original';
 
@@ -34,10 +33,18 @@ export class MoviesSliderComponent implements OnInit {
   group!: ElementRef<HTMLElement>;
 
   groupWidth: number = 0;
+  loading: boolean = true;
 
   ngOnInit(): void {
-    this.Movies.sliderMovies().subscribe((result) => {
-      this.movies.set(result.results);
+    this.movieService.getSliderMovies().subscribe({
+      next: () => {
+        setTimeout(() => {
+          this.loading = false;
+        }, 500);
+      },
+      error: () => {
+        this.loading = false;
+      },
     });
   }
 
@@ -81,7 +88,6 @@ export class MoviesSliderComponent implements OnInit {
   checkInfiniteScroll() {
     // Cuando el grupo se ha desplazado completamente
     if (Math.abs(this.currentTranslate) >= this.groupWidth) {
-      
       this.currentTranslate = 0;
       this.prevTranslate = 0;
     }

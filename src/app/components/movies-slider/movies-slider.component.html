@@ -9,67 +9,99 @@
   (touchend)="onDragEnd()"
 >
   <div class="track" [ngStyle]="getSliderStyle()">
-    <div #group class="group" aria-hidden="true" [class.paused]="paused">
-      <div class="card" *ngFor="let movie of movies()">
-        <img
-          draggable="false"
-          [src]="backdropPath + movie.backdrop_path"
-          [alt]="movie.title"
-        />
-        <div class="caption">
-          <h2>{{ movie.title }}</h2>
-          <p class="d-none d-md-block">{{ movie.overview }}</p>
-          <div class="d-md-none">
-            <i class="bi bi-star-fill" style="color: #ffd700"></i>
-            <span>{{ (movie.vote_average / 2).toFixed(1) }}/5</span>
-          </div>
-          <div class="rating d-none d-md-flex">
-            <i
-              *ngFor="let star of [1, 2, 3, 4, 5]"
-              [class]="
-                'bi ' +
-                (star <= movie.vote_average / 2 ? 'bi-star-fill' : 'bi-star')
-              "
-              [style.color]="
-                star <= movie.vote_average / 2 ? '#ffd700' : '#ccc'
-              "
-            ></i>
+    <div #group class="group" [class.paused]="paused">
+      <!-- Skeleton mientras carga -->
+      <ng-container *ngIf="loading; else moviesLoaded">
+        <div class="card skeleton" *ngFor="let n of [1, 2, 3, 4, 5]">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-caption">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-text"></div>
           </div>
         </div>
-      </div>
+      </ng-container>
+
+      <!-- Carrusel real -->
+      <ng-template #moviesLoaded>
+        <div
+          class="card"
+          *ngFor="let movie of movieService.sliderMoviesSignal().results"
+        >
+          <img
+            draggable="false"
+            [src]="backdropPath + movie.backdrop_path"
+            [alt]="movie.title"
+          />
+          <div class="caption">
+            <h2>{{ movie.title }}</h2>
+            <p class="d-none d-md-block">{{ movie.overview }}</p>
+            <div class="d-md-none">
+              <i class="bi bi-star-fill" style="color: #ffd700"></i>
+              <span>{{ (movie.vote_average / 2).toFixed(1) }}/5</span>
+            </div>
+            <div class="rating d-none d-md-flex">
+              <i
+                *ngFor="let star of [1, 2, 3, 4, 5]"
+                [class]="
+                  'bi ' +
+                  (star <= movie.vote_average / 2 ? 'bi-star-fill' : 'bi-star')
+                "
+                [style.color]="
+                  star <= movie.vote_average / 2 ? '#ffd700' : '#ccc'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 
+  <!-- Duplicamos el grupo para el efecto infinito -->
   <div class="track" [ngStyle]="getSliderStyle()">
-    <div #group class="group" aria-hidden="true" [class.paused]="paused">
-      <div class="card" *ngFor="let movie of movies()">
-        <img
-          draggable="false"
-          clicked="false"
-          [src]="backdropPath + movie.backdrop_path"
-          [alt]="movie.title"
-        />
-        <div class="caption">
-          <h2>{{ movie.title }}</h2>
-          <p class="d-none d-md-block">{{ movie.overview }}</p>
-          <div class="d-md-none">
-            <i class="bi bi-star-fill" style="color: #ffd700"></i>
-            <span>{{ (movie.vote_average / 2).toFixed(1) }}/5</span>
-          </div>
-          <div class="rating d-none d-md-flex">
-            <i
-              *ngFor="let star of [1, 2, 3, 4, 5]"
-              [class]="
-                'bi ' +
-                (star <= movie.vote_average / 2 ? 'bi-star-fill' : 'bi-star')
-              "
-              [style.color]="
-                star <= movie.vote_average / 2 ? '#ffd700' : '#ccc'
-              "
-            ></i>
+    <div #group class="group" [class.paused]="paused" aria-hidden="true">
+      <ng-container *ngIf="loading; else moviesLoadedDuplicate">
+        <div class="card skeleton" *ngFor="let n of [1, 2, 3, 4, 5]">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-caption">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-text"></div>
           </div>
         </div>
-      </div>
+      </ng-container>
+
+      <ng-template #moviesLoadedDuplicate>
+        <div
+          class="card"
+          *ngFor="let movie of movieService.sliderMoviesSignal().results"
+        >
+          <img
+            draggable="false"
+            [src]="backdropPath + movie.backdrop_path"
+            [alt]="movie.title"
+          />
+          <div class="caption">
+            <h2>{{ movie.title }}</h2>
+            <p class="d-none d-md-block">{{ movie.overview }}</p>
+            <div class="d-md-none">
+              <i class="bi bi-star-fill" style="color: #ffd700"></i>
+              <span>{{ (movie.vote_average / 2).toFixed(1) }}/5</span>
+            </div>
+            <div class="rating d-none d-md-flex">
+              <i
+                *ngFor="let star of [1, 2, 3, 4, 5]"
+                [class]="
+                  'bi ' +
+                  (star <= movie.vote_average / 2 ? 'bi-star-fill' : 'bi-star')
+                "
+                [style.color]="
+                  star <= movie.vote_average / 2 ? '#ffd700' : '#ccc'
+                "
+              ></i>
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
