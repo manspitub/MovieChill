@@ -1,0 +1,30 @@
+<section class="smart-pick">
+  <!-- BACKDROP -->
+  <img
+    class="backdrop"
+    [class.hidden]="loading() || !movie()"
+    [src]="movie() ? backdropPath + movie()!.backdrop_path : ''"
+    [alt]="movie()?.title || ''"
+  />
+
+  <!-- OVERLAY -->
+  <div class="overlay" [class.hidden]="loading() || !movie()">
+    <h1>¿No sabes qué ver?</h1>
+    <h2>{{ movie()?.title }}</h2>
+
+    <p class="rating">
+      ⭐ {{ movie() ? (movie()!.vote_average / 2).toFixed(1) : "" }}/5
+    </p>
+
+    <p class="tagline">Perfecta para ver hoy 🍿</p>
+
+    <div class="actions">
+      <button class="primary" (click)="pickMovie()">Dame otra 🔁</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" [class.hidden]="!loading()">
+    Pensando qué recomendarte…
+  </div>
+</section>

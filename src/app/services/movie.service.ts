@@ -14,6 +14,7 @@ export class MovieService {
   sliderMoviesSignal = signal<Movies>({} as Movies);
   genreMoviesSignal = signal<{ [genreId: number]: Movies }>({});
   genresSignal = signal<GenresResponse>({} as GenresResponse);
+  trendingMoviesSignal = signal<Movies>({} as Movies);
   userLang = navigator.language || 'en-US';
 
   constructor() {}
@@ -29,9 +30,9 @@ export class MovieService {
 
   getGenresSignal(): Observable<GenresResponse> {
     return this.http
-      .get<
-        GenresResponse
-      >(`${environment.tmdbBaseUrl}/genre/movie/list?api_key=${environment.tmdbApiKey}&language=${this.userLang}`)
+      .get<GenresResponse>(
+        `${environment.tmdbBaseUrl}/genre/movie/list?api_key=${environment.tmdbApiKey}&language=${this.userLang}`,
+      )
       .pipe(tap((data) => this.genresSignal.set(data)));
   }
 
@@ -41,11 +42,21 @@ export class MovieService {
         `${environment.tmdbBaseUrl}/discover/movie?api_key=${environment.tmdbApiKey}&with_genres=${genreId}&page=${page}&language=${this.userLang}`,
       )
       .pipe(
-        tap((data) => this.genreMoviesSignal.set({
+        tap((data) =>
+          this.genreMoviesSignal.set({
             ...this.genreMoviesSignal(),
             [genreId]: data,
-          })),
+          }),
+        ),
         tap((data) => data.results),
       );
+  }
+
+  getTrendingMovies(page: number = 1): Observable<Movies> {
+    return this.http
+      .get<Movies>(
+        `${environment.tmdbBaseUrl}/trending/movie/week?api_key=${environment.tmdbApiKey}&page=${page}&language=${this.userLang}`,
+      )
+      .pipe(tap((data) => this.trendingMoviesSignal.set(data)));
   }
 }

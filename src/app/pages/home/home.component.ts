@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { MoviesSliderComponent } from '../../components/movies-slider/movies-slider.component';
-import { MovieSectionComponent } from "../../components/movie-section/movie-section.component";
-
+import { MovieSectionComponent } from '../../components/movie-section/movie-section.component';
+import { SmartPickComponent } from "../../components/smart-pick/smart-pick.component";
 
 @Component({
   selector: 'app-home',
-  imports: [MoviesSliderComponent, MovieSectionComponent],
+  imports: [MovieSectionComponent, SmartPickComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

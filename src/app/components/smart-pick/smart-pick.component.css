@@ -1,0 +1,188 @@
+/* Smart Pick - Netflix Style */
+.smart-pick {
+  margin-top: 0 !important;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  border-radius: 15px;
+  margin: 2rem 0;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Backdrop de la película */
+.smart-pick .backdrop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) blur(2px);
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.smart-pick .backdrop:hover {
+  transform: scale(1.05);
+  filter: brightness(0.25) blur(1px);
+}
+
+/* Overlay oscuro con contenido */
+.smart-pick .overlay {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  color: #fff;
+  z-index: 10;
+  max-width: 50%;
+  animation: fadeIn 1s ease;
+}
+
+/* Título principal */
+.smart-pick .overlay h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #e50914; /* rojo Netflix */
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Título de la película */
+.smart-pick .overlay h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Rating */
+.smart-pick .overlay .rating {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Tagline */
+.smart-pick .overlay .tagline {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  opacity: 0.85;
+}
+
+/* Botón llamativo */
+.smart-pick .overlay .actions .primary {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.smart-pick .overlay .actions .primary:hover {
+  background-color: #ff0a1c;
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Loading */
+.smart-pick .loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(270deg, #e50914, #b81d24, #e50914);
+  background-size: 600% 600%;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  animation: loadingGradient 3s ease infinite;
+  text-align: center;
+}
+
+/* Ocultar elementos */
+.hidden {
+  display: none;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loadingGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 1200px) {
+  .smart-pick .overlay {
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .smart-pick .overlay {
+    max-width: 80%;
+  }
+
+  .smart-pick .overlay h1 {
+    font-size: 2rem;
+  }
+
+  .smart-pick .overlay h2 {
+    font-size: 1.5rem;
+  }
+
+  .smart-pick .overlay .rating {
+    font-size: 1rem;
+  }
+
+  .smart-pick .overlay .tagline {
+    font-size: 0.9rem;
+  }
+
+  .smart-pick .overlay .actions .primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .smart-pick .overlay {
+    max-width: 90%;
+    left: 5%;
+  }
+
+  .smart-pick .overlay h1 {
+    font-size: 1.5rem;
+  }
+
+  .smart-pick .overlay h2 {
+    font-size: 1.2rem;
+  }
+}
