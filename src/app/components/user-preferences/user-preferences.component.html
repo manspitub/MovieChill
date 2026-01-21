@@ -1,0 +1,27 @@
+<section class="user-preferences">
+  <h2>🎬 ¿Qué quieres ver hoy?</h2>
+
+  <!-- Selección de género -->
+  <div class="options genres">
+    <span
+      *ngFor="let g of genres"
+      [class.selected]="movieService.preferencesSignal().genre === g"
+      (click)="setPreference('genre', g)"
+    >
+      {{ g }}
+    </span>
+  </div>
+
+  <!-- Selección de tipo -->
+  <div class="options types">
+    <span
+      *ngFor="let t of types"
+      [class.selected]="movieService.preferencesSignal().type === t"
+      (click)="setPreference('type', t)"
+    >
+      {{ t === "movie" ? "Película" : "Serie" }}
+    </span>
+  </div>
+
+  <button class="reset" (click)="resetPreferences()">🔄 Reiniciar</button>
+</section>

@@ -1,0 +1,51 @@
+<section class="survey-container">
+  <div class="step-indicator">
+    <span *ngFor="let s of steps; let i = index" [class.active]="i === currentStep()">{{ s }}</span>
+  </div>
+
+  <div class="survey-step">
+    <!-- Paso 0: Tipo -->
+    <div *ngIf="currentStep() === 0">
+      <h2>¿Qué quieres ver?</h2>
+      <div class="options">
+        <button [class.selected]="answers().type==='movie'" (click)="selectType('movie')">Película</button>
+        <button [class.selected]="answers().type==='tv'" (click)="selectType('tv')">Serie</button>
+      </div>
+    </div>
+
+    <!-- Paso 1: Géneros -->
+    <div *ngIf="currentStep() === 1">
+      <h2>Elige tus géneros favoritos</h2>
+      <div class="options genres">
+        <button *ngFor="let g of genreOptions" 
+                [class.selected]="answers().genres.includes(g)" 
+                (click)="toggleGenre(g)">{{ g }}</button>
+      </div>
+    </div>
+
+    <!-- Paso 2: Mood -->
+    <div *ngIf="currentStep() === 2">
+      <h2>¿Cuál es tu mood hoy?</h2>
+      <div class="options moods">
+        <button *ngFor="let m of moodOptions" 
+                [class.selected]="answers().mood === m" 
+                (click)="selectMood(m)">{{ m }}</button>
+      </div>
+    </div>
+
+    <!-- Paso 3: Duración -->
+    <div *ngIf="currentStep() === 3">
+      <h2>¿Cuánto tiempo quieres ver?</h2>
+      <div class="options runtimes">
+        <button *ngFor="let r of runtimeOptions" 
+                [class.selected]="answers().runtime === r" 
+                (click)="selectRuntime(r)">{{ r }}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <button (click)="prevStep()" [disabled]="currentStep()===0">Atrás</button>
+    <button (click)="nextStep()">{{ currentStep() === steps.length-1 ? 'Finalizar' : 'Siguiente' }}</button>
+  </div>
+</section>

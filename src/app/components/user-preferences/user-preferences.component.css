@@ -1,0 +1,53 @@
+.user-preferences {
+  background: linear-gradient(90deg, #141414, #1b1b1b);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.user-preferences h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #e50914;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.options span {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #333;
+}
+
+.options span:hover {
+  background: #e50914;
+  transform: scale(1.05);
+}
+
+.options span.selected {
+  background: #e50914;
+}
+
+.reset {
+  background: transparent;
+  border: 2px solid #e50914;
+  color: #e50914;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.reset:hover {
+  background: #e50914;
+  color: white;
+}

@@ -1,2 +1,8 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<app-user-survey
+  *ngIf="showSurvey()"
+  (surveyComplete)="surveyFinished()"
+></app-user-survey>
+<ng-container *ngIf="!showSurvey()">
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+</ng-container>

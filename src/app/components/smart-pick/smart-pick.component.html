@@ -2,29 +2,46 @@
   <!-- BACKDROP -->
   <img
     class="backdrop"
-    [class.hidden]="loading() || !movie()"
     [src]="movie() ? backdropPath + movie()!.backdrop_path : ''"
     [alt]="movie()?.title || ''"
+    [class.hidden]="loading()"
   />
 
-  <!-- OVERLAY -->
-  <div class="overlay" [class.hidden]="loading() || !movie()">
-    <h1>¿No sabes qué ver?</h1>
-    <h2>{{ movie()?.title }}</h2>
+  <!-- GRADIENTS -->
+  <div class="gradient-left"></div>
+  <div class="gradient-bottom"></div>
 
-    <p class="rating">
-      ⭐ {{ movie() ? (movie()!.vote_average / 2).toFixed(1) : "" }}/5
-    </p>
+  <!-- CONTENT -->
+  <div class="fusion-layer">
+    <div class="content" [class.hidden]="loading()">
+      <div class="meta">
+        <span class="rating"
+          >★ {{ (movie()?.vote_average! / 2).toFixed(1) }}</span
+        >
+        <span class="info">
+          {{ movie()?.genre_ids?.join(", ") }} •
+          {{ movie()?.release_date | date: "yyyy" }} •
+          {{ movie()?.video ? "🎬" : "" }}
+        </span>
+      </div>
 
-    <p class="tagline">Perfecta para ver hoy 🍿</p>
+      <h1 class="title">{{ movie()?.title }}</h1>
 
-    <div class="actions">
-      <button class="primary" (click)="pickMovie()">Dame otra 🔁</button>
+      <p class="overview">
+        {{ movie()?.overview }}
+      </p>
+
+      <div class="actions">
+        <button class="btn primary">Movie Details</button>
+        <button class="btn secondary" (click)="pickMovie()">
+          Another Pick
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- LOADING -->
-  <div class="loading" [class.hidden]="!loading()">
-    Pensando qué recomendarte…
+  <div class="loading" *ngIf="loading()">
+    <p class="loading-text">Buscando la mejor película...</p>
   </div>
 </section>

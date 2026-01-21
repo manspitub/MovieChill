@@ -17,6 +17,8 @@ export class MovieService {
   trendingMoviesSignal = signal<Movies>({} as Movies);
   userLang = navigator.language || 'en-US';
 
+  preferencesSignal = signal<{ genre?: string; type?: 'movie' | 'tv' }>({});
+
   constructor() {}
 
   getSliderMovies(page: number = 1): Observable<Movies> {

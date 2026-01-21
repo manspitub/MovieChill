@@ -1,0 +1,79 @@
+.survey-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #141414, #000);
+  color: white;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.step-indicator {
+  display: flex;
+  gap: 1rem;
+  font-weight: bold;
+}
+.step-indicator span {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.step-indicator span.active {
+  opacity: 1;
+  color: #e50914;
+}
+
+.survey-step h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.options button {
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  background: #222;
+  border: 2px solid #444;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.options button:hover {
+  border-color: #e50914;
+  background: #333;
+}
+.options button.selected {
+  background: #e50914;
+  border-color: #e50914;
+}
+
+.navigation {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+.navigation button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: #e50914;
+  color: white;
+  transition: background 0.3s;
+}
+.navigation button:hover:not(:disabled) {
+  background: #f40612;
+}
+.navigation button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
