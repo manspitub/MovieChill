@@ -22,18 +22,22 @@ export class SmartPickComponent implements OnInit {
 
     this.movieService.getTrendingMovies().subscribe({
       next: () => {
-        console.log('Trending movies fetched for Smart Pick.', this.movieService.trendingMoviesSignal());
-        const candidates = this.movieService
-        
-          .trendingMoviesSignal()
-          .results
+        console.log(
+          'Trending movies fetched for Smart Pick.',
+          this.movieService.trendingMoviesSignal(),
+        );
+        const candidates = this.movieService.trendingMoviesSignal().results;
 
         const random =
           candidates[Math.floor(Math.random() * candidates.length)];
 
         setTimeout(() => {
-          this.movie.set(random);
-          this.loading.set(false);
+          const img = new Image();
+          img.src = this.backdropPath + random.backdrop_path;
+          img.onload = () => {
+            this.movie.set(random); // solo actualizar cuando la nueva imagen esté lista
+            this.loading.set(false);
+          };
         }, 1500);
       },
       error: () => this.loading.set(false),
