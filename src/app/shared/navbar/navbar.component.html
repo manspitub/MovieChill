@@ -23,11 +23,19 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/discover">
+        <li class="nav-item dropdown" (mouseenter)="toggleGenresDropdown()" (mouseleave)="closeGenresDropdown()">
+          <a class="nav-link active dropdown-toggle" (click)="toggleGenresDropdown(); $event.preventDefault()">
             <i class="bi bi-compass"></i>
             <span class="nav-text">Discover</span>
+            <i class="bi bi-chevron-down dropdown-arrow"></i>
           </a>
+          <ul class="dropdown-menu" [class.show]="showGenresDropdown()">
+            <li *ngFor="let genre of genres()">
+              <a class="dropdown-item" (click)="scrollToGenre(genre.id)">
+                {{ genre.name }}
+              </a>
+            </li>
+          </ul>
         </li>
 
         <li class="nav-item">

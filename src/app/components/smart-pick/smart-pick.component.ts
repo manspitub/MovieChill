@@ -44,7 +44,7 @@ export class SmartPickComponent implements OnInit {
         // Obtener detalles de la película para tener runtime y géneros completos
         this.movieService.getMovieDetails(random.id).subscribe({
           next: (details) => {
-            this.movieDetails.set(details);
+            
             // Mapear géneros a nombres
             const genreNames = details.genres.map((genre) => genre.name);
 
@@ -55,6 +55,7 @@ export class SmartPickComponent implements OnInit {
               img.onload = () => {
                 this.movie.set(random);
                 this.genres.set(genreNames);
+                this.movieDetails.set(details);
                 this.loading.set(false);
               };
             }, 1500);

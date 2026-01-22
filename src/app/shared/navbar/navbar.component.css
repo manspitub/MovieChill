@@ -54,6 +54,90 @@
   padding: 12px 20px;
 }
 
+/* Dropdown de Géneros */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  margin-left: 4px;
+  transition: transform var(--transition-base);
+}
+
+.dropdown:hover .dropdown-arrow,
+.dropdown-toggle:focus + .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: var(--spacing-xs);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xs) 0;
+  min-width: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: opacity var(--transition-base), 
+              visibility var(--transition-base),
+              transform var(--transition-base);
+  z-index: var(--z-modal);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-full);
+}
+
+.dropdown-item {
+  color: var(--color-text-primary);
+  padding: var(--spacing-xs) var(--spacing-md);
+  display: block;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.dropdown-item:hover {
+  background: var(--color-bg-card);
+  color: var(--color-primary);
+  padding-left: var(--spacing-lg);
+}
+
+.dropdown-item:active {
+  background: var(--color-bg-card-hover);
+}
+
 @media only screen and (max-width: 991px) {
   .navbar-toggler {
     background-color: hsl(0, 0%, 83%) !important;
@@ -97,5 +181,21 @@
   .navbar-collapse {
     display: flex !important;
     flex-basis: auto;
+  }
+
+  /* Dropdown en móvil */
+  .dropdown-menu {
+    left: 0;
+    transform: translateX(0) translateY(-10px);
+    min-width: 180px;
+    max-height: 300px;
+  }
+
+  .dropdown-menu.show {
+    transform: translateX(0) translateY(0);
+  }
+
+  .dropdown-arrow {
+    display: none;
   }
 }
