@@ -1,21 +1,18 @@
 .smart-pick {
   position: relative;
   min-height: 100vh;
-
   overflow: hidden;
-  color: white;
-  background: black;
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
 }
 
 .smart-pick::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0) 40%,
-    rgba(0, 0, 0, 0.6) 100%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(0, 0, 0, 0) 40%,
+      var(--color-bg-overlay) 100%);
   pointer-events: none;
 }
 
@@ -41,108 +38,115 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(
-      to bottom,
+    linear-gradient(to bottom,
       rgba(11, 11, 11, 0) 0%,
-      rgba(11, 11, 11, 0.6) 55%,
-      rgba(11, 11, 11, 1) 100%
-    ),
-    linear-gradient(
-      to right,
+      var(--color-bg-overlay) 55%,
+      var(--color-bg-primary) 100%),
+    linear-gradient(to right,
       rgba(11, 11, 11, 0.95) 0%,
-      rgba(11, 11, 11, 0.6) 35%,
-      rgba(11, 11, 11, 0) 60%
-    );
-  z-index: 1;
+      var(--color-bg-overlay) 35%,
+      rgba(11, 11, 11, 0) 60%);
+  z-index: var(--z-base);
 }
 
 /* GRADIENTS */
 .gradient-left {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.7) 30%,
-    rgba(0, 0, 0, 0) 60%
-  );
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.7) 30%,
+      rgba(0, 0, 0, 0) 60%);
 }
 
 .gradient-bottom {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0) 10%
-  );
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0) 10%);
 }
 
 /* CONTENT */
 .content {
   text-align: center;
   width: 100%;
-  padding: 1.5rem;
   text-overflow: hidden;
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: var(--z-overlay);
   min-width: 80%;
   padding: 6rem;
+  padding-top: 8rem;
+  /* Espacio para el navbar fijo */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 1.2rem;
-
   opacity: 1;
-  transition:
-    opacity 1s ease-in-out,
-    transform 0.8s ease-in-out;
   transform: translateY(0);
+  max-height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .content.hidden {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(20px); /* ligeramente bajado al inicio */
+  transform: translateY(15px);
+  transition: opacity 0.6s ease-in, transform 0.6s ease-in;
 }
 
-.content > * {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.8s ease-in-out,
-    transform 0.8s ease-in-out;
-}
-
-.content:not(.hidden) > * {
+.content>* {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Delays */
-.content > .meta {
+.content.hidden>* {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+/* Delays escalonados solo cuando aparece (no está hidden) */
+.content:not(.hidden)>.meta {
+  transition-delay: 0.1s;
+}
+
+.content:not(.hidden)>.title {
   transition-delay: 0.2s;
 }
-.content > .title {
+
+.content:not(.hidden)>.overview {
+  transition-delay: 0.3s;
+}
+
+.content:not(.hidden)>.actions {
   transition-delay: 0.4s;
-}
-.content > .overview {
-  transition-delay: 0.6s;
-}
-.content > .actions {
-  transition-delay: 0.8s;
 }
 
 @media (max-width: 768px) {
   .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* centro vertical */
-    align-items: center; /* centro horizontal */
-    text-align: center;
-    padding: 1.5rem;
+    padding: var(--spacing-md);
+    padding-top: 6rem;
+    /* Menos espacio en móvil pero respetando navbar */
+    gap: 1rem;
+  }
+
+  .overview {
+    
+    /* Menos altura en móvil */
+    -webkit-line-clamp: 4;
+    /* Máximo 4 líneas en móvil */
+    font-size: 0.95rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    /* Título más pequeño en móvil */
   }
 }
 
@@ -150,17 +154,38 @@
 .meta {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--spacing-sm);
   font-size: 0.9rem;
   opacity: 0.9;
 }
 
 .rating {
-  background: #2ecc71;
-  color: black;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: var(--color-text-primary);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+}
+
+.rating:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(46, 204, 113, 0.4);
+}
+
+.rating::before {
+  content: "★";
+  font-size: 1.1rem;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.4));
 }
 
 /* TITLE */
@@ -178,48 +203,55 @@
 .overview {
   font-size: 1.05rem;
   line-height: 1.6;
-
   opacity: 0.95;
+  max-width: 800px;
+  max-height: 150px;
+  /* Limita la altura máxima */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  /* Máximo 5 líneas */
+  -webkit-box-orient: vertical;
+  margin: 0 auto;
+  word-wrap: break-word;
 }
 
 /* ACTIONS */
 .actions {
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
 }
 
 .btn {
   padding: 0.9rem 1.8rem;
   font-size: 0.95rem;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   border: none;
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .btn.primary {
-  background: #e50914;
-  color: white;
+  background: var(--color-primary);
+  color: var(--color-text-primary);
 }
 
 .btn.secondary {
   background: rgba(255, 255, 255, 0.15);
-  color: white;
+  color: var(--color-text-primary);
   backdrop-filter: blur(10px);
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-lg);
 }
 
 /* LOADING */
 .loading {
-  text-decoration: bl;
-  color: #e50914;
+  color: var(--color-primary);
   position: absolute;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -227,15 +259,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-
-  animation: pulse 1 ease-in-out infinite;
-}
-
-/* UTIL */
-.hidden {
-  opacity: 0;
-  pointer-events: none;
+  animation: pulse var(--transition-slow) ease-in-out infinite;
 }
 
 .pulse {
@@ -243,7 +267,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, #e50914 0%, rgba(229, 9, 20, 0) 70%);
+  background: radial-gradient(circle, var(--color-primary) 0%, rgba(229, 9, 20, 0) 70%);
   animation: pulse 2s infinite;
 }
 
@@ -255,40 +279,11 @@
   animation-delay: 1s;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(0.5);
-    opacity: 0.1; /* muy tenue al inicio */
-    background: radial-gradient(circle, #ff0000 0%, rgba(255, 0, 0, 0) 70%);
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 1; /* pico de luminosidad */
-    background: radial-gradient(circle, #ff2a2a 0%, rgba(255, 42, 42, 0) 70%);
-  }
-  100% {
-    transform: scale(1.8);
-    opacity: 0; /* desaparece */
-    background: radial-gradient(circle, #ff0000 0%, rgba(255, 0, 0, 0) 70%);
-  }
-}
-
 .loading-text {
   margin-top: 30px;
-  font-size: 1.2rem;
-  color: #e50914;
+  font-size: 1.5rem;
+  color: var(--color-primary);
   letter-spacing: 1px;
   text-align: center;
-  animation: fadeIn 1.2s infinite;
-}
-@keyframes fadeIn {
-  0%,
-  100% {
-    opacity: 0.1; /* muy tenue al inicio y final */
-    color: #ff0000; /* rojo más oscuro */
-  }
-  50% {
-    opacity: 1; /* luminosidad máxima */
-    color: #ff2a2a; /* rojo brillante */
-  }
+  animation: fadeIn var(--transition-slower) infinite;
 }

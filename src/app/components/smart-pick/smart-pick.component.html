@@ -13,25 +13,25 @@
 
   <!-- CONTENT -->
   <div class="fusion-layer">
-    <div class="content" [class.hidden]="loading()">
-      <div class="meta">
+    <div class="content" [class.hidden]="loading() || !movie()">
+      <div class="meta" *ngIf="movie()">
         <span class="rating"
-          >★ {{ (movie()?.vote_average! / 2).toFixed(1) }}</span
+          >{{ (movie()?.vote_average! / 2).toFixed(1) }}</span
         >
         <span class="info">
-          {{ movie()?.genre_ids?.join(", ") }} •
+          {{ genres().join(", ") }} •
           {{ movie()?.release_date | date: "yyyy" }} •
-          {{ movie()?.video ? "🎬" : "" }}
+          {{ formatRuntime(movieDetails()?.runtime) }}
         </span>
       </div>
 
-      <h1 class="title">{{ movie()?.title }}</h1>
+      <h1 class="title" *ngIf="movie()">{{ movie()?.title }}</h1>
 
-      <p class="overview">
+      <p class="overview" *ngIf="movie()">
         {{ movie()?.overview }}
       </p>
 
-      <div class="actions">
+      <div class="actions" *ngIf="movie()">
         <button class="btn primary">Movie Details</button>
         <button class="btn secondary" (click)="pickMovie()">
           Another Pick

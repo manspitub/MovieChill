@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Movie, Movies } from '../shared/interfaces/movies';
+import { Movies, MovieDetails } from '../shared/interfaces/movies';
 import { Observable, tap } from 'rxjs';
-import { Genre, GenresResponse } from '../shared/interfaces/genres';
+import { GenresResponse } from '../shared/interfaces/genres';
 
 @Injectable({
   providedIn: 'root',
@@ -60,5 +60,11 @@ export class MovieService {
         `${environment.tmdbBaseUrl}/trending/movie/week?api_key=${environment.tmdbApiKey}&page=${page}&language=${this.userLang}`,
       )
       .pipe(tap((data) => this.trendingMoviesSignal.set(data)));
+  }
+
+  getMovieDetails(movieId: number): Observable<MovieDetails> {
+    return this.http.get<MovieDetails>(
+      `${environment.tmdbBaseUrl}/movie/${movieId}?api_key=${environment.tmdbApiKey}&language=${this.userLang}`,
+    );
   }
 }

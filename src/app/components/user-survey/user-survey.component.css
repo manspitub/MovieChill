@@ -4,75 +4,82 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(180deg, #141414, #000);
-  color: white;
-  padding: 2rem;
-  gap: 2rem;
+  background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-primary));
+  color: var(--color-text-primary);
+  padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
 }
 
 .step-indicator {
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-sm);
   font-weight: bold;
 }
+
 .step-indicator span {
   opacity: 0.5;
-  transition: opacity 0.3s;
+  transition: opacity var(--transition-base);
 }
+
 .step-indicator span.active {
   opacity: 1;
-  color: #e50914;
+  color: var(--color-primary);
 }
 
 .survey-step h2 {
   font-size: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
 .options {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--spacing-sm);
   justify-content: center;
 }
 
 .options button {
-  padding: 1rem 2rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: 6px;
-  background: #222;
-  border: 2px solid #444;
-  color: white;
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border-default);
+  color: var(--color-text-primary);
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all var(--transition-base);
 }
+
 .options button:hover {
-  border-color: #e50914;
-  background: #333;
+  border-color: var(--color-primary);
+  background: var(--color-bg-card-hover);
 }
+
 .options button.selected {
-  background: #e50914;
-  border-color: #e50914;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .navigation {
-  margin-top: 2rem;
+  margin-top: var(--spacing-lg);
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-sm);
 }
+
 .navigation button {
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: var(--radius-md);
   border: none;
   cursor: pointer;
-  background: #e50914;
-  color: white;
-  transition: background 0.3s;
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+  transition: background var(--transition-base);
 }
+
 .navigation button:hover:not(:disabled) {
-  background: #f40612;
+  background: var(--color-primary-hover);
 }
+
 .navigation button:disabled {
   background: #555;
   cursor: not-allowed;

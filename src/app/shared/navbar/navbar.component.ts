@@ -16,7 +16,8 @@ export class NavbarComponent {
 
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.navBackground = {
-        'background-color': '#0e0e0ede',
+        'backdrop-filter': 'blur(10px)',
+        '-webkit-backdrop-filter': 'blur(10px)',
       };
     } else {
       this.navBackground = {};

@@ -1,5 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* ============================================
+   VARIABLES CSS - Sistema de Diseño Unificado
+   ============================================ */
+:root {
+  /* Colores Principales */
+  --color-primary: #e50914;
+  --color-primary-hover: #f40612;
+  --color-primary-dark: #ee0808;
+  --color-primary-light: #ff2a2a;
+  
+  /* Colores de Fondo */
+  --color-bg-primary: #0b0b0b;
+  --color-bg-secondary: #141414;
+  --color-bg-tertiary: #1b1b1b;
+  --color-bg-card: #222;
+  --color-bg-card-hover: #333;
+  --color-bg-overlay: rgba(0, 0, 0, 0.6);
+  --color-bg-overlay-light: rgba(0, 0, 0, 0.3);
+  
+  /* Colores de Texto */
+  --color-text-primary: #fff;
+  --color-text-secondary: #aaa;
+  --color-text-muted: #797979;
+  
+  /* Colores de Borde */
+  --color-border-default: #444;
+  --color-border-muted: #797979;
+  --color-border-hover: var(--color-primary);
+  
+  /* Espaciado */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 999px;
+  
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.8s ease-in-out;
+  --transition-slower: 1.2s ease-in-out;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px var(--color-primary);
+  
+  /* Z-index */
+  --z-base: 1;
+  --z-overlay: 2;
+  --z-modal: 10;
+}
+
+/* ============================================
+   RESET Y BASE
+   ============================================ */
 * {
   margin: 0;
   padding: 0;
@@ -7,10 +71,153 @@
 
 body {
   font-family: "Lato", sans-serif;
-  background-color: #0b0b0b;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }
 
 a {
   text-decoration: none;
   cursor: pointer;
+}
+
+/* ============================================
+   CLASES UTILITARIAS COMPARTIDAS
+   ============================================ */
+
+/* Flexbox Utilities */
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* Botones Base */
+.btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--color-text-primary);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+}
+
+.btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Estados de Visibilidad */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.visible {
+  opacity: 1;
+}
+
+/* Scrollbar Oculto */
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Gradientes Comunes */
+.gradient-dark-bg {
+  background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-primary));
+}
+
+.gradient-card {
+  background: linear-gradient(90deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+}
+
+/* Transiciones de Fade */
+.fade-in {
+  animation: fadeIn var(--transition-slower) ease-in-out;
+}
+
+@keyframes fadeIn {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Pulse Animation */
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }

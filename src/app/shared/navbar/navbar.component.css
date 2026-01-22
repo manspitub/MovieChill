@@ -1,11 +1,11 @@
 .navbar-brand {
-  color: red;
+  color: var(--color-primary);
   font-weight: 900;
   font-size: 30px;
 }
 
 .nav-item {
-  color: red;
+  color: var(--color-primary);
   font-size: 18px;
   font-weight: 700;
 }
@@ -28,20 +28,20 @@
 }
 
 .nav-link.active {
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .nav-link.active:hover,
 .nav-link.active:focus {
-  color: #ee0808;
+  color: var(--color-primary-dark);
 }
 
 .btn {
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .btn:hover {
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .search {
@@ -50,7 +50,7 @@
 
 .logout {
   margin-top: 0 !important;
-  color: #fff;
+  color: var(--color-text-primary);
   padding: 12px 20px;
 }
 
@@ -76,7 +76,7 @@
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    padding: 0.5rem 0;
+    padding: var(--spacing-xs) 0;
   }
 
   .nav-item {
@@ -97,23 +97,5 @@
   .navbar-collapse {
     display: flex !important;
     flex-basis: auto;
-  }
-
-  .navbar-nav {
-    flex-direction: row !important;
-    width: 100%;
-    justify-content: space-around;
-  }
-
-  /* Evitar menú vertical */
-  .navbar-collapse {
-    display: flex !important;
-    flex-basis: auto;
-  }
-
-  .navbar-nav {
-    flex-direction: row !important;
-    width: 100%;
-    justify-content: space-around;
   }
 }
